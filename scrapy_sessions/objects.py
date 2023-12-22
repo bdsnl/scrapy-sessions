@@ -117,7 +117,7 @@ class Sessions:
             self._download_request(renewal_request)
 
     def _download_request(self, request):
-        d = self.engine._download(request, self.spider)
+        d = self.engine._download(request)
         d.addBoth(self.engine._handle_downloader_output, request, self.spider)
         d.addErrback(lambda f: logger.info('Error while handling downloader output',
                                         exc_info=failure_to_exc_info(f),
@@ -147,7 +147,7 @@ class Profiles(object):
 
     def _clear(self, session_id):
         if session_id in self.ref:
-            del self.ref[session_id]
+          del self.ref[session_id]
 
     def new_session(self, session_id):
         available = self.get_fresh()
